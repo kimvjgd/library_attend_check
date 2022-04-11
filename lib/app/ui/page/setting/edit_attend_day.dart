@@ -6,6 +6,8 @@ class EditAttendDay extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    List<String> week = ['월','화','수','목','금','토','일'];
+
     return Scaffold(
       appBar: AppBar(
         title: Text('EditProfilePage'),
@@ -15,9 +17,23 @@ class EditAttendDay extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           SizedBox(height: 40,),
-          Padding(
-            padding: const EdgeInsets.all(30.0),
-            child: TextField(decoration: InputDecoration(hintText: "도서관 이름"),),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: List.generate(
+                7,
+                    (index) => Row(
+                  children: [
+                    Container(
+                      child: Center(child: Text(week[index],textAlign: TextAlign.center,)),
+                      margin: EdgeInsets.zero,
+                      padding: EdgeInsets.zero,
+                      width: 35,
+                      height: 35,
+                      color: Colors.lightGreenAccent,
+                    ),
+                    SizedBox(width: 12,)
+                  ],
+                )).toList(),
           ),
           TextButton(
             onPressed: () {

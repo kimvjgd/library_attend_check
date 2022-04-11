@@ -15,47 +15,9 @@ class EditLibPage extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           SizedBox(height: 40,),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              Container(
-                margin: EdgeInsets.zero,
-                padding: EdgeInsets.zero,
-                width: 30,
-                height: 30,
-                color: Colors.red,
-              ),
-              Container(
-                width: 30,
-                height: 30,
-                color: Colors.red,
-              ),
-              Container(
-                width: 30,
-                height: 30,
-                color: Colors.red,
-              ),
-              Container(
-                width: 30,
-                height: 30,
-                color: Colors.red,
-              ),
-              Container(
-                width: 30,
-                height: 30,
-                color: Colors.red,
-              ),
-              Container(
-                width: 30,
-                height: 30,
-                color: Colors.red,
-              ),
-              Container(
-                width: 30,
-                height: 30,
-                color: Colors.red,
-              ),
-            ],
+          Padding(
+            padding: const EdgeInsets.all(30.0),
+            child: TextField(decoration: InputDecoration(hintText: "도서관 이름"),),
           ),
           TextButton(
             onPressed: () {
