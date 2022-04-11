@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "417063670889",
+    "project_id": "libraryattendcheck",
+    "storage_bucket": "libraryattendcheck.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:417063670889:android:fe420d4d96299112d97ef8",
+        "android_client_info": {
+          "package_name": "com.dongpakka.library_attend_check"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "417063670889-6o1v9ujreccrvcssfs3dtnk9mso4nv7o.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.dongpakka.library_attend_check",
+            "certificate_hash": "fe806dfb5ea8120ef25d8b7255b6a21d5612eaa8"
+          }
+        },
+        {
+          "client_id": "417063670889-k35kk9l0mv2p8io7pmcl9qb5nn3bnce0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA305eHI3UxYjJ1dK3_p6aDPvRUfzq-2js"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "417063670889-k35kk9l0mv2p8io7pmcl9qb5nn3bnce0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
