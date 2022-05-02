@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:library_attend_check/app/ui/page/main/component/calendar.dart';
-import 'package:library_attend_check/app/ui/page/main/component/main_drawer.dart';
-import 'package:library_attend_check/app/ui/page/main/component/schedule_card.dart';
-import 'package:library_attend_check/app/ui/page/main/component/today_banner.dart';
+import 'package:library_attend_check/app/ui/page/calendar/widgets/calendar.dart';
+import 'package:library_attend_check/app/ui/widgets/main_drawer.dart';
+import 'package:library_attend_check/app/ui/page/calendar/widgets/schedule_card.dart';
+import 'package:library_attend_check/app/ui/page/calendar/widgets/today_banner.dart';
 import 'package:library_attend_check/app/ui/page/setting/setting_page.dart';
 
 class CalendarPage extends StatefulWidget {

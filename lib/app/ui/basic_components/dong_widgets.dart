@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:library_attend_check/app/ui/components/dong_constants.dart';
+import 'package:library_attend_check/app/ui/basic_components/dong_constants.dart';
 
 class BottomSheetBody extends StatelessWidget {
   BottomSheetBody({Key? key, required this.children}) : super(key: key);

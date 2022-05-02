@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:library_attend_check/app/ui/components/dong_colors.dart';
+import 'package:library_attend_check/app/ui/basic_components/dong_colors.dart';
 
 class DongThemes {
 

@@ -1,10 +1,13 @@
 import 'package:extended_image/extended_image.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:library_attend_check/app/ui/page/main/calendar_page.dart';
-import 'package:library_attend_check/app/ui/page/main/map_page.dart';
+import 'package:library_attend_check/app/controller/auth_controller.dart';
+import 'package:library_attend_check/app/ui/page/calendar/page/calendar_page.dart';
+import 'package:library_attend_check/app/ui/page/map/map_page.dart';
 import 'package:library_attend_check/app/ui/page/setting/setting_page.dart';
+import 'package:library_attend_check/root_page.dart';
 
 class MainDrawer extends StatelessWidget {
   const MainDrawer({Key? key}) : super(key: key);
@@ -63,8 +66,19 @@ class MainDrawer extends StatelessWidget {
               Get.to(SettingPage());
             },
           ), // settingPage는 Get.to로 보내고.
+          ListTile(
+            title: Text('로그아웃'),
+            onTap: () {
+              signOut();
+            },
+          )
         ],
       ),
     );
+  }
+  Future<void> signOut() async {
+    AuthController.to.signOut();
+    await FirebaseAuth.instance.signOut();
+    Get.to(()=>RootPage());
   }
 }

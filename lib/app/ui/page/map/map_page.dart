@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:library_attend_check/app/ui/page/main/component/main_drawer.dart';
+import 'package:library_attend_check/app/ui/widgets/main_drawer.dart';
 import 'package:library_attend_check/app/ui/page/setting/setting_page.dart';
 
 class MapPage extends StatefulWidget {
@@ -65,26 +65,6 @@ class _MapPageState extends State<MapPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('출석'),
-        leading: IconButton(
-          onPressed: () async {
-            if(mapController == null) {
-              return;
-            }
-            final location = await Geolocator.getCurrentPosition();
-
-            mapController!.animateCamera(CameraUpdate.newLatLng(
-              LatLng(location.latitude, location.longitude)
-            ));
-          },
-          icon: Icon(
-            Icons.my_location,
-            color: Colors.red,
-          ),
-        ),
-      ),
-      endDrawer: MainDrawer(),
       body: FutureBuilder<String>(
         future: checkPermission(),
         builder: (BuildContext context, AsyncSnapshot snapshot) {

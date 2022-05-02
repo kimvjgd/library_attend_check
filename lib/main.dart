@@ -1,14 +1,21 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:intl/date_symbol_data_local.dart';
-import 'package:library_attend_check/app/ui/page/main/calendar_page.dart';
-import 'package:library_attend_check/app/ui/page/main/map_page.dart';
-import 'package:library_attend_check/root.dart';
+import 'package:library_attend_check/app/binding/init_bindings.dart';
+import 'package:library_attend_check/app/ui/page/home_page.dart';
+import 'package:library_attend_check/app/ui/page/intro/login_page.dart';
+import 'package:library_attend_check/root_page.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await initializeDateFormatting();
-  runApp(const MyApp());
+  await Firebase.initializeApp();
+  SystemChrome.setPreferredOrientations(
+      [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]).then((_) {
+    runApp(MyApp());
+  });
 }
 
 class MyApp extends StatelessWidget {
@@ -23,10 +30,12 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      initialRoute: "/",
-      getPages: [
-        GetPage(name: "/", page: ()=>Root(),)
-      ],
+      initialBinding: InitBinding(),
+      home: HomePage(),
+      // initialRoute: "/",
+      // getPages: [
+      //   GetPage(name: "/", page: ()=>RootPage(),)
+      // ],
     );
   }
 }

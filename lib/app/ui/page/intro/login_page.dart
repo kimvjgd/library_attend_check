@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:library_attend_check/app/ui/page/intro/signup_info_page.dart';
+import 'package:library_attend_check/root_page.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -38,8 +39,9 @@ class LoginPage extends StatelessWidget {
                         fit: BoxFit.fitWidth,
               )),
               TextButton(
-                onPressed: () {
-                  Get.to(SignupInfoPage());
+                onPressed: () async {
+                  await signInWithGoogle();
+                  Get.to(RootPage());
                 },
                 child: Text(
                   '구글로그인',
