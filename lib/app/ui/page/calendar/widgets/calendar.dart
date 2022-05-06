@@ -24,55 +24,55 @@ class Calendar extends StatelessWidget {
     Map<DateTime, List<Event>> eventSource = {
       DateTime.utc(2022, 5, 3): [
         Event(title: '5분 기도하기', check: false),
-        Event(title: '교회 가서 인증샷 찍기', check: true),
-        Event(title: 'QT하기', check: true),
-        Event(title: '셀 모임하기', check: false),
+        // Event(title: '교회 가서 인증샷 찍기', check: true),
+        // Event(title: 'QT하기', check: true),
+        // Event(title: '셀 모임하기', check: false),
       ],
       DateTime.utc(2022, 5, 5): [
         Event(title: '5분 기도하기', check: false),
-        Event(title: '치킨 먹기', check: true),
-        Event(title: 'QT하기', check: true),
-        Event(title: '셀 모임하기', check: false),
+        // Event(title: '치킨 먹기', check: true),
+        // Event(title: 'QT하기', check: true),
+        // Event(title: '셀 모임하기', check: false),
       ],
       DateTime.utc(2022, 5, 8): [
         Event(title: '5분 기도하기', check: false),
-        Event(title: '자기 셀카 올리기', check: true),
-        Event(title: 'QT하기', check: false),
-        Event(title: '셀 모임하기', check: false),
+        // Event(title: '자기 셀카 올리기', check: true),
+        // Event(title: 'QT하기', check: false),
+        // Event(title: '셀 모임하기', check: false),
       ],
       DateTime.utc(2022, 5, 11): [
         Event(title: '5분 기도하기', check: false),
-        Event(title: '가족과 저녁식사 하기', check: true),
-        Event(title: 'QT하기', check: true)
+        // Event(title: '가족과 저녁식사 하기', check: true),
+        // Event(title: 'QT하기', check: true)
       ],
       DateTime.utc(2022, 5, 13): [
         Event(title: '5분 기도하기', check: false),
-        Event(title: '교회 가서 인증샷 찍기', check: true),
-        Event(title: 'QT하기', check: false),
-        Event(title: '셀 모임하기', check: false),
+        // Event(title: '교회 가서 인증샷 찍기', check: true),
+        // Event(title: 'QT하기', check: false),
+        // Event(title: '셀 모임하기', check: false),
       ],
       DateTime.utc(2022, 5, 15): [
         Event(title: '5분 기도하기', check: false),
-        Event(title: '치킨 먹기', check: false),
-        Event(title: 'QT하기', check: true),
-        Event(title: '셀 모임하기', check: false),
+        // Event(title: '치킨 먹기', check: false),
+        // Event(title: 'QT하기', check: true),
+        // Event(title: '셀 모임하기', check: false),
       ],
       DateTime.utc(2022, 5, 18): [
         Event(title: '5분 기도하기', check: false),
-        Event(title: '자기 셀카 올리기', check: true),
-        Event(title: 'QT하기', check: false),
-        Event(title: '셀 모임하기', check: false),
+        // Event(title: '자기 셀카 올리기', check: true),
+        // Event(title: 'QT하기', check: false),
+        // Event(title: '셀 모임하기', check: false),
       ],
       DateTime.utc(2022, 5, 20): [
         Event(title: '5분 기도하기', check: true),
-        Event(title: '자기 셀카 올리기', check: true),
-        Event(title: 'QT하기', check: true),
-        Event(title: '셀 모임하기', check: true),
+        // Event(title: '자기 셀카 올리기', check: true),
+        // Event(title: 'QT하기', check: true),
+        // Event(title: '셀 모임하기', check: true),
       ],
       DateTime.utc(2022, 5, 21): [
         Event(title: '5분 기도하기', check: false),
-        Event(title: '가족과 저녁식사 하기', check: true),
-        Event(title: 'QT하기', check: false)
+        // Event(title: '가족과 저녁식사 하기', check: true),
+        // Event(title: 'QT하기', check: false)
       ]
     };
 
@@ -112,15 +112,18 @@ class Calendar extends StatelessWidget {
                 itemCount: events.length,
                 itemBuilder: (context, index) {
                   return Container(
-                    margin: const EdgeInsets.only(top: 20),
-                    padding: const EdgeInsets.all(1),
-                    child: Container(
-                      // height: 7,
-                      width: 5,
-                      decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          color: Colors.primaries[
-                          Random().nextInt(Colors.primaries.length)]),
+                    // margin: const EdgeInsets.only(top: 20),
+                    padding: const EdgeInsets.all(5),
+                    child: Opacity(
+                      opacity: 0.6,
+                      child: Container(
+                        // height: 7,
+                        width: 40,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(12.0),
+                          color: Colors.green[200],
+                        ),
+                      ),
                     ),
                   );
                 });
@@ -161,6 +164,7 @@ class Calendar extends StatelessWidget {
           // 오늘 날짜
           defaultDecoration: defaultBoxDeco,
           weekendDecoration: defaultBoxDeco,
+
 
           // markerDecoration: BoxDecoration(
           //     image: DecorationImage(
