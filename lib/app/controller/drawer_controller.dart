@@ -2,7 +2,7 @@ import 'package:get/get.dart';
 
 enum PageName{MAP, CALENDAR, SETTING,}
 
-class DrawerController extends GetxController {
+class EndDrawerController extends GetxController {
   RxInt pageIndex = 0.obs;
 
   void changePage(int value) {

@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:library_attend_check/app/ui/page/setting/edit_attend_day.dart';
 import 'package:library_attend_check/app/ui/page/setting/edit_lib_page.dart';
 import 'package:library_attend_check/app/ui/page/setting/edit_profile_page.dart';
@@ -12,15 +13,24 @@ class SettingPage extends StatefulWidget {
   @override
   State<SettingPage> createState() => _SettingPageState();
 }
+bool isDarkMode = false;
+
 
 class _SettingPageState extends State<SettingPage> {
+  late Box _darkMode;
   bool isSwitched = false;
   bool _vib = false;
 
   @override
+  void initState() {
+    _darkMode = Hive.box('darkModeBox');
+    isDarkMode = _darkMode.get('darkMode', defaultValue: true);
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
       body: SettingsList(
         sections: [
           _common(),
@@ -64,10 +74,14 @@ class _SettingPageState extends State<SettingPage> {
           trailing: Icon(Icons.arrow_forward_ios),
         ),
         SettingsTile.switchTile(
-          onToggle: (value) {},
-          initialValue: true,
+          onToggle: (value) {
+            setState(() {
+              changeAppMode(value);
+            });
+          },
+          initialValue: isDarkMode,
           leading: Icon(Icons.format_paint),
-          title: Text('Dark theme'),
+          title: Text('Dark Theme'),
         )
       ],
     );
@@ -136,6 +150,18 @@ class _SettingPageState extends State<SettingPage> {
         ),
       ],
     );
+  }
+  void changeAppMode(bool isDark) {
+    setState(() {
+      if (isDark == true) {
+        isDarkMode = true;
+        _darkMode.put('darkMode', true);
+      } else {
+        isDarkMode = false;
+        _darkMode.put('darkMode', false);
+      }
+    });
+    print;
   }
 }
 

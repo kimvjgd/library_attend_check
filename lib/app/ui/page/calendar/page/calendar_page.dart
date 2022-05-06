@@ -14,15 +14,13 @@ class CalendarPage extends StatefulWidget {
 }
 
 class _CalendarPageState extends State<CalendarPage> {
-  DateTime selectedDay = DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day);
+  DateTime selectedDay =
+      DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day);
   DateTime focusedDay = DateTime.now();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('기록'),
-      ),
       endDrawer: MainDrawer(),
       body: SafeArea(
         child: Column(
@@ -37,11 +35,17 @@ class _CalendarPageState extends State<CalendarPage> {
             ),
             TodayBanner(selectedDay: selectedDay, scheduleCount: 4),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8.0,vertical: 4.0),
-              child: TodoCard(todoCheck: false, content: '프로그래밍 공부하기', color: Colors.red),
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
+              child: TodoCard(
+                  todoCheck: true, content: '프로그래밍 공부하기', color: Colors.red),
             )
           ],
         ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {},
+        child: Icon(Icons.add),
       ),
     );
   }
