@@ -46,7 +46,7 @@ class MyApp extends StatelessWidget {
               /* dark theme setting */
             ),
           initialBinding: InitBinding(),
-          home: HomePage(),
+          home: RootPage(),
           // initialRoute: "/",
           // getPages: [
           //   GetPage(name: "/", page: ()=>RootPage(),)

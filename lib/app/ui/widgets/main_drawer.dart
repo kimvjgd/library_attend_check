@@ -3,10 +3,11 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:library_attend_check/app/controller/auth_controller.dart';
 import 'package:library_attend_check/app/controller/drawer_controller.dart';
 import 'package:library_attend_check/app/ui/page/calendar/page/calendar_page.dart';
-import 'package:library_attend_check/app/ui/page/map/map_page.dart';
+import 'package:library_attend_check/app/ui/page/map/page/map_page.dart';
 import 'package:library_attend_check/app/ui/page/setting/setting_page.dart';
 import 'package:library_attend_check/root_page.dart';
 
@@ -42,8 +43,8 @@ class MainDrawer extends GetView<EndDrawerController> {
           ), // settingPage는 Get.to로 보내고.
           ListTile(
             title: Text('로그아웃'),
-            onTap: () {
-              signOut();
+            onTap: () async {
+              await signOut();
             },
           )
         ],
@@ -70,7 +71,7 @@ class MainDrawer extends GetView<EndDrawerController> {
                   Text('동동이',style: TextStyle(fontSize: 30),)
                 ],
               ),
-              Text('dongdong222@naver.com'),
+              Text(AuthController.to.user.value.email!),
               SizedBox(height: 3,),
               Row(children: [Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 4.0),
@@ -85,8 +86,10 @@ class MainDrawer extends GetView<EndDrawerController> {
         ));
   }
   Future<void> signOut() async {
-    AuthController.to.signOut();
+    final GoogleSignIn _googleSignIn = GoogleSignIn();
     await FirebaseAuth.instance.signOut();
+    await _googleSignIn.signOut();
+    AuthController.to.signOut();
     Get.to(()=>RootPage());
   }
 }

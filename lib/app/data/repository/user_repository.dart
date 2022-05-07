@@ -20,7 +20,8 @@ class UserRepository {
     try {
       await FirebaseFirestore.instance
           .collection(COLLECTION_USERS)
-          .add(user.toMap());
+          .doc(user.uid)
+          .set(user.toMap());
       return true;
     } catch (e) {
       return false;

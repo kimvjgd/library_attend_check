@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:library_attend_check/app/controller/drawer_controller.dart';
 import 'package:library_attend_check/app/ui/page/calendar/page/calendar_page.dart';
-import 'package:library_attend_check/app/ui/page/map/map_page.dart';
+import 'package:library_attend_check/app/ui/page/map/page/map_page.dart';
 import 'package:library_attend_check/app/ui/page/setting/setting_page.dart';
 import 'package:library_attend_check/app/ui/widgets/main_drawer.dart';
 import 'package:library_attend_check/app/ui/widgets/message_popup.dart';

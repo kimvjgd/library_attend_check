@@ -2,14 +2,16 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
 import 'package:get/get.dart';
+import 'package:library_attend_check/app/controller/auth_controller.dart';
 import 'package:library_attend_check/app/data/model/app_user.dart';
 import 'package:library_attend_check/app/data/provider/univ_list.dart';
 import 'package:library_attend_check/app/data/repository/user_repository.dart';
-import 'package:library_attend_check/app/ui/page/map/map_page.dart';
+import 'package:library_attend_check/app/ui/page/map/page/map_page.dart';
 import 'package:library_attend_check/root_page.dart';
 
 class SignupInfoPage extends StatefulWidget {
-  const SignupInfoPage({Key? key}) : super(key: key);
+  final String uid;
+  const SignupInfoPage({required this.uid, Key? key}) : super(key: key);
 
   @override
   State<SignupInfoPage> createState() => _SignupInfoPageState();
@@ -106,13 +108,18 @@ class _SignupInfoPageState extends State<SignupInfoPage> {
                         backgroundColor:
                             MaterialStateProperty.all(Colors.lightGreen)),
                     onPressed: () async {
+                      print(AuthController.to.user.value.uid);
+                      print(FirebaseAuth.instance.currentUser!.uid);
+                      print(FirebaseAuth.instance.currentUser!.email);
+
                       await UserRepository.signup(AppUser(
-                          uid: FirebaseAuth.instance.currentUser!.uid,
+                          uid: widget.uid,
                           email: FirebaseAuth.instance.currentUser!.email!,
                           nickname: _nameController.text,
                           university: _univController.text,
                           friendsList: [],
-                          friendsWaitingList: []));
+                          friendsWaitingList: [],
+                          attendanceList: []));
                       Get.to(RootPage());
                     },
                     child: Text(

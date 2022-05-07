@@ -1,10 +1,8 @@
-import 'package:extended_image/extended_image.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
-import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:library_attend_check/app/ui/widgets/main_drawer.dart';
-import 'package:library_attend_check/app/ui/page/setting/setting_page.dart';
+import 'package:library_attend_check/app/data/repository/map_repository.dart';
+import 'package:library_attend_check/app/ui/page/map/widget/choolCheckButton.dart';
 
 class MapPage extends StatefulWidget {
   const MapPage({Key? key}) : super(key: key);
@@ -19,8 +17,10 @@ class _MapPageState extends State<MapPage> {
 
   // latitude - 위도, longitude - 경도
 
+  // 37.5974538!4d126.8917157/
   static final LatLng companyLatLng =
-      LatLng(37.56393853398269, 126.93694121523816); // 연세대학교 도서관
+  // LatLng(37.56393853398269, 126.93694121523816); // 연세대학교 도서관
+  LatLng(37.5974538, 126.8917158); // 연세대학교 도서관
 
   static final CameraPosition initialPosition =
       CameraPosition(target: companyLatLng, zoom: 15);
@@ -108,7 +108,7 @@ class _MapPageState extends State<MapPage> {
                               marker: marker,
                               onMapCreated: onMapCreated,
                             ),
-                            _choolCheckButton(
+                            ChoolCheckButton(
                               isWithinRange: isWithinRange,
                               choolCheckDone: choolCheckDone,
                               withinOnPressed: withinOnPressed,
@@ -139,16 +139,20 @@ class _MapPageState extends State<MapPage> {
         context: context,
         builder: (BuildContext context) {
           return AlertDialog(
-            title: Text('출근하기'),
-            content: Text('출근을 하시겠습니까?'),
+            title: Text('출석하기'),
+            content: Text('출석을 하시겠습니까?'),
             actions: [
               TextButton(
                   onPressed: () {
+                    DateTime today = DateTime.now();
+                    print('${today.year}/${today.month}/${today.day}');
                     Navigator.of(context).pop(false);
                   },
                   child: Text('취소')),
               TextButton(
-                  onPressed: () {
+                  onPressed: () async {
+                    // 출석하기 버튼 누르면
+                    await MapRepository.attendanceCheck();
                     Navigator.of(context).pop(true);
                   },
                   child: Text('출근하기')),
@@ -282,81 +286,3 @@ class _googleMap extends StatelessWidget {
   }
 }
 
-class _choolCheckButton extends StatelessWidget {
-  final bool isWithinRange;
-  final VoidCallback withinOnPressed;
-  final VoidCallback outRangeOnPressed;
-  final bool choolCheckDone;
-
-  const _choolCheckButton(
-      {required this.isWithinRange,
-      required this.withinOnPressed,
-      required this.outRangeOnPressed,
-      required this.choolCheckDone,
-      Key? key})
-      : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Positioned(
-        bottom: 20,
-        child: SizedBox(
-          width: MediaQuery.of(context).size.width,
-          height: MediaQuery.of(context).size.height * 0.07,
-          child: Container(
-            padding: EdgeInsets.symmetric(
-                horizontal: MediaQuery.of(context).size.width * 0.2),
-            child: choolCheckDone
-                ? ElevatedButton(
-                    style: ElevatedButton.styleFrom(primary: Colors.lightGreen),
-                    onPressed: outRangeOnPressed,
-                    //     () {
-                    //
-                    // },
-                    child: Text(
-                      '출석 완료',
-                      style:
-                          TextStyle(fontSize: 30, fontWeight: FontWeight.w300),
-                    ),
-                  )
-                : isWithinRange
-                    ? ElevatedButton(
-                        onPressed: withinOnPressed,
-                        //     () {
-                        //   showDialog(
-                        //       context: context,
-                        //       builder: (context) => Dialog(
-                        //             child: Column(
-                        //               mainAxisSize: MainAxisSize.min,
-                        //               children: [
-                        //                 ExtendedImage.asset(
-                        //                   'asset/img/fire.png',
-                        //                   fit: BoxFit.cover,
-                        //                 ),
-                        //                 Text('연속 3일 출석'),
-                        //               ],
-                        //             ),
-                        //           ));
-                        // },
-                        child: Text(
-                          '출 석 하 기',
-                          style: TextStyle(
-                              fontSize: 30, fontWeight: FontWeight.w300),
-                        ),
-                      )
-                    : ElevatedButton(
-                        style: ElevatedButton.styleFrom(primary: Colors.grey),
-                        onPressed: outRangeOnPressed,
-                        //     () {
-                        //
-                        // },
-                        child: Text(
-                          '도서관 근처로..',
-                          style: TextStyle(
-                              fontSize: 30, fontWeight: FontWeight.w300),
-                        ),
-                      ),
-          ),
-        ));
-  }
-}

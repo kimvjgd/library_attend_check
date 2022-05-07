@@ -1,3 +1,5 @@
+import 'package:library_attend_check/app/data/model/firestore_keys.dart';
+
 class AppUser {
   String? uid;
   String? email;
@@ -5,6 +7,7 @@ class AppUser {
   String? university;
   List? friendsList;
   List? friendsWaitingList;
+  List? attendanceList;
 
   AppUser(
       {this.uid,
@@ -12,7 +15,8 @@ class AppUser {
       this.nickname,
       this.university,
       this.friendsList,
-      this.friendsWaitingList});
+      this.friendsWaitingList,
+      this.attendanceList});
 
   factory AppUser.fromJson(Map<String, dynamic> json) {
     return AppUser(
@@ -26,6 +30,10 @@ class AppUser {
       friendsWaitingList: json['friendsWaitingList'] == null
           ? []
           : json['friendsWaitingList'] as List,
+      attendanceList: json[KEY_USER_ATTENDANCE_LIST] == null
+          ? []
+          : json[KEY_USER_ATTENDANCE_LIST] as List,
+
     );
   }
 
@@ -37,6 +45,7 @@ class AppUser {
       "university": university,
       "friendsList": friendsList,
       "friendsWaitingList": friendsWaitingList,
+      KEY_USER_ATTENDANCE_LIST: attendanceList,
     };
   }
 
@@ -47,6 +56,7 @@ class AppUser {
     String? university,
     List? friendsList,
     List? friendsWaitingList,
+    List? attendanceList,
   }) {
     return AppUser(
       uid: uid ?? this.uid,
@@ -55,6 +65,7 @@ class AppUser {
       university: university ?? this.university,
       friendsList: friendsList ?? this.friendsList,
       friendsWaitingList: friendsWaitingList ?? this.friendsWaitingList,
+      attendanceList: attendanceList ?? this.attendanceList,
     );
   }
 }
