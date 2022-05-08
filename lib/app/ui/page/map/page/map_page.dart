@@ -155,7 +155,7 @@ class _MapPageState extends State<MapPage> {
                     await MapRepository.attendanceCheck();
                     Navigator.of(context).pop(true);
                   },
-                  child: Text('출근하기')),
+                  child: Text('출석하기')),
             ],
           );
         });
