@@ -121,6 +121,7 @@ class _SignupInfoPageState extends State<SignupInfoPage> {
                       print(AuthController.to.user.value.uid);
                       print(FirebaseAuth.instance.currentUser!.uid);
                       print(FirebaseAuth.instance.currentUser!.email);
+                      await AuthController.to.loginUser(widget.uid);
                       Get.to(HomePage());
                     },
                     child: Text(
