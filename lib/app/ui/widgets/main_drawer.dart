@@ -68,10 +68,10 @@ class MainDrawer extends GetView<EndDrawerController> {
                     ),
                   ),
                   SizedBox(width: 20,),
-                  Text('동동이',style: TextStyle(fontSize: 30),)
+                  Text(AuthController.to.user.value.nickname??'',style: TextStyle(fontSize: 30),)
                 ],
               ),
-              Text(AuthController.to.user.value.email!),
+              Text(AuthController.to.user.value.email??''),
               SizedBox(height: 3,),
               Row(children: [Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 4.0),

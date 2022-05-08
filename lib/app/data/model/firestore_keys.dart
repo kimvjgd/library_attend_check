@@ -2,6 +2,7 @@ const COLLECTION_USERS = 'users';
 
 const KEY_USER_EMAIL = 'email';
 const KEY_USER_NICKNAME = 'nickname';
+const KEY_USER_UID = 'uid';
 const KEY_USER_UNIVERSITY = 'university';
 const KEY_USER_FRIENDS_LIST = 'friends_list';
 const KEY_USER_FRIENDS_WAITING_LIST = 'friends_waiting_list';

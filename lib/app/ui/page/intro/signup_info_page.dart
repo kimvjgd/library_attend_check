@@ -6,8 +6,10 @@ import 'package:library_attend_check/app/controller/auth_controller.dart';
 import 'package:library_attend_check/app/data/model/app_user.dart';
 import 'package:library_attend_check/app/data/provider/univ_list.dart';
 import 'package:library_attend_check/app/data/repository/user_repository.dart';
+import 'package:library_attend_check/app/ui/page/home_page.dart';
 import 'package:library_attend_check/app/ui/page/map/page/map_page.dart';
 import 'package:library_attend_check/root_page.dart';
+import 'package:logger/logger.dart';
 
 class SignupInfoPage extends StatefulWidget {
   final String uid;
@@ -108,19 +110,18 @@ class _SignupInfoPageState extends State<SignupInfoPage> {
                         backgroundColor:
                             MaterialStateProperty.all(Colors.lightGreen)),
                     onPressed: () async {
-                      print(AuthController.to.user.value.uid);
-                      print(FirebaseAuth.instance.currentUser!.uid);
-                      print(FirebaseAuth.instance.currentUser!.email);
-
                       await UserRepository.signup(AppUser(
                           uid: widget.uid,
-                          email: FirebaseAuth.instance.currentUser!.email!,
+                          email: FirebaseAuth.instance.currentUser?.email!,
                           nickname: _nameController.text,
                           university: _univController.text,
                           friendsList: [],
                           friendsWaitingList: [],
                           attendanceList: []));
-                      Get.to(RootPage());
+                      print(AuthController.to.user.value.uid);
+                      print(FirebaseAuth.instance.currentUser!.uid);
+                      print(FirebaseAuth.instance.currentUser!.email);
+                      Get.to(HomePage());
                     },
                     child: Text(
                       '시작하기',

@@ -7,6 +7,7 @@ import 'package:library_attend_check/app/ui/page/home_page.dart';
 import 'package:library_attend_check/app/ui/page/intro/login_page.dart';
 import 'package:library_attend_check/app/ui/page/intro/signup_info_page.dart';
 import 'package:library_attend_check/app/ui/page/map/page/map_page.dart';
+import 'package:logger/logger.dart';
 
 class RootPage extends GetView<AuthController> {
   const RootPage({Key? key}) : super(key: key);

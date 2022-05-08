@@ -1,17 +1,19 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:library_attend_check/app/data/model/app_user.dart';
 import 'package:library_attend_check/app/data/model/firestore_keys.dart';
+import 'package:logger/logger.dart';
 
 class UserRepository {
   static Future<AppUser?> loginUserByUid(String uid) async {
     var data = await FirebaseFirestore.instance
-        .collection('users')
-        .where('uid', isEqualTo: uid)
+        .collection(COLLECTION_USERS)
+        .where(KEY_USER_UID, isEqualTo: uid)
         .get();
 
     if (data.size == 0) {
       return null;
     } else {
+      Logger().d(data.docs.first.data());
       return AppUser.fromJson(data.docs.first.data());
     }
   }
