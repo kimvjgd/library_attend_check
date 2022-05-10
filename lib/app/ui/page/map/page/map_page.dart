@@ -198,6 +198,8 @@ class _MapPageState extends State<MapPage> {
     final isLocationEnabled = await Geolocator
         .isLocationServiceEnabled(); // 앱과 무관하게 핸드폰의 gps 권한이 꺼져 있으면..
 
+    choolCheckDone = await MapRepository.todayAttendCheck();
+
     if (!isLocationEnabled) {
       return '위치 서비스를 활성화 해주세요.';
     }
@@ -242,7 +244,8 @@ class _MapPageState extends State<MapPage> {
                 itemCount: 4),
           ),
           IconButton(
-              onPressed: () {},
+              onPressed: () {
+              },
               icon: Icon(
                 Icons.add_circle_rounded,
                 color: Colors.lightGreenAccent,

@@ -66,7 +66,7 @@ class Calendar extends StatelessWidget {
               width: 40,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(12.0),
-                color: Colors.green[200],
+                color: Colors.green[300],
               ),
             ),
           ),

@@ -61,11 +61,12 @@ class MainDrawer extends GetView<EndDrawerController> {
               Row(
                 children: [
                   ClipOval(
-                    child: ExtendedImage.asset(
-                      'asset/img/alpaca.png',
-                      fit: BoxFit.cover,
-                      height: 70,
-                    ),
+                    child: ExtendedImage.network(FirebaseAuth.instance.currentUser!.photoURL!,height: 50,)
+                    // ExtendedImage.asset(
+                    //   'asset/img/alpaca.png',
+                    //   fit: BoxFit.cover,
+                    //   height: 70,
+                    // ),
                   ),
                   SizedBox(width: 20,),
                   Text(AuthController.to.user.value.nickname??'',style: TextStyle(fontSize: 30),)
@@ -76,7 +77,7 @@ class MainDrawer extends GetView<EndDrawerController> {
               Row(children: [Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 4.0),
                 child: Icon(CupertinoIcons.rectangle_paperclip),
-              ), Text('서울대학교 도서관')],),
+              ), Text('${AuthController.to.user.value.university} 도서관')],),
               Row(children: [Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 4.0),
                 child: Icon(Icons.local_fire_department_outlined),
