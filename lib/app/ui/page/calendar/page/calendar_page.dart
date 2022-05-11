@@ -23,13 +23,7 @@ class CalendarPage extends StatefulWidget {
 class _CalendarPageState extends State<CalendarPage> {
   List<dynamic> todoList = [];
   DateTime selectedDay =
-  DateTime(DateTime
-      .now()
-      .year, DateTime
-      .now()
-      .month, DateTime
-      .now()
-      .day);
+      DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day);
   DateTime focusedDay = DateTime.now();
   List<DateTime> attendDateList = [];
 
@@ -51,19 +45,20 @@ class _CalendarPageState extends State<CalendarPage> {
         child: Column(
           children: [
             FutureBuilder<List<DateTime>>(
-                future: CalendarRepository.getAllAttendDate(),
-                builder: (context, snapshot) {
-                  if (!snapshot.hasData) {
-                    return CircularProgressIndicator();
-                  }
-                  // Logger().d(snapshot.data!);
-                  return Calendar(
-                    selectedDay: selectedDay,
-                    focusedDay: focusedDay,
-                    onDaySelected: onDaySelected,
-                    attendDateList: snapshot.data!,
-                  );
-                }),
+              future: CalendarRepository.getAllAttendDate(),
+              builder: (context, snapshot) {
+                if (!snapshot.hasData) {
+                  return CircularProgressIndicator();
+                }
+                // Logger().d(snapshot.data!);
+                return Calendar(
+                  selectedDay: selectedDay,
+                  focusedDay: focusedDay,
+                  onDaySelected: onDaySelected,
+                  attendDateList: snapshot.data!,
+                );
+              },
+            ),
             SizedBox(
               height: 8.0,
             ),
@@ -76,13 +71,10 @@ class _CalendarPageState extends State<CalendarPage> {
                     onTap: () {
                       showDialog(
                           context: context,
-                          builder: (context) =>
-                              MessagePopup(
+                          builder: (context) => MessagePopup(
                                 title: "타이틀",
                                 message: '메세지',
-                                okCallback: () {
-
-                                },
+                                okCallback: () {},
                                 cancelCallback: () {
                                   Get.back();
                                 },
@@ -91,7 +83,7 @@ class _CalendarPageState extends State<CalendarPage> {
                     child: TodoCard(
                         todoCheck: true,
                         content: todoList[index][KEY_TODO_TITLE],
-                        color: Colors.red),
+                        colorString: todoList[index][KEY_TODO_COLOR]),
                   );
                 },
                 itemCount: todoList.length,
@@ -102,18 +94,16 @@ class _CalendarPageState extends State<CalendarPage> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
-          todoList =
-              await showModalBottomSheet(
-                  context: context,
-                  isScrollControlled: true,
-                  builder: (_) {
-                    return TodoBottomSheet(selectedDate: selectedDay,);
-                  });
-          setState(() {
-
-          });
+          todoList = await showModalBottomSheet(
+              context: context,
+              isScrollControlled: true,
+              builder: (_) {
+                return TodoBottomSheet(
+                  selectedDate: selectedDay,
+                );
+              });
+          setState(() {});
         },
-
         child: Icon(Icons.add),
       ),
     );

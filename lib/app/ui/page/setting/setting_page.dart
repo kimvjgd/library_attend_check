@@ -1,10 +1,13 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:library_attend_check/app/ui/page/setting/edit_attend_day.dart';
+import 'package:library_attend_check/app/controller/auth_controller.dart';
 import 'package:library_attend_check/app/ui/page/setting/edit_lib_page.dart';
 import 'package:library_attend_check/app/ui/page/setting/edit_profile_page.dart';
+import 'package:library_attend_check/root_page.dart';
 import 'package:settings_ui/settings_ui.dart';
 
 class SettingPage extends StatefulWidget {
@@ -13,8 +16,8 @@ class SettingPage extends StatefulWidget {
   @override
   State<SettingPage> createState() => _SettingPageState();
 }
-bool isDarkMode = false;
 
+bool isDarkMode = false;
 
 class _SettingPageState extends State<SettingPage> {
   late Box _darkMode;
@@ -34,10 +37,9 @@ class _SettingPageState extends State<SettingPage> {
       body: SettingsList(
         sections: [
           _common(),
-          _alarm(),
+          // _alarm(),
 
           _aboutApp(),
-
         ],
       ),
     );
@@ -53,15 +55,6 @@ class _SettingPageState extends State<SettingPage> {
           // value: Text('English'),
           onPressed: (context) {
             Get.to(EditProfilePage());
-          },
-          trailing: Icon(Icons.arrow_forward_ios),
-        ),
-        SettingsTile.navigation(
-          leading: Icon(Icons.calendar_today_outlined),
-          title: Text('출석요일 변경'),
-          value: Text('월,화,수,목,금'),
-          onPressed: (context) {
-            Get.to(EditAttendDay());
           },
           trailing: Icon(Icons.arrow_forward_ios),
         ),
@@ -82,7 +75,21 @@ class _SettingPageState extends State<SettingPage> {
           initialValue: isDarkMode,
           leading: Icon(Icons.format_paint),
           title: Text('Dark Theme'),
-        )
+        ),
+        SettingsTile.navigation(
+          leading: Icon(
+            Icons.logout,
+            color: Colors.red,
+          ),
+          title: Text(
+            'Log Out',
+            style: TextStyle(color: Colors.red),
+          ),
+          // value: Text('English'),
+          onPressed: (context) async {
+            await signOut();
+          },
+        ),
       ],
     );
   }
@@ -93,22 +100,16 @@ class _SettingPageState extends State<SettingPage> {
       tiles: <SettingsTile>[
         SettingsTile.navigation(
           leading: Icon(Icons.list),
-          title: Text('Alarm List',style: TextStyle(),),
+          title: Text(
+            'Alarm List',
+            style: TextStyle(),
+          ),
           onPressed: (context) {
             // Navigator.of(context).push(MaterialPageRoute(builder: (context)=>@@@));
           },
           trailing: Icon(Icons.arrow_forward_ios),
         ),
-        // SettingsTile.switchTile(     // Alarm List 안에 넣을 예정
-        //   onToggle: (value) {
-        //     setState(() {
-        //
-        //     });
-        //   },
-        //   initialValue: true,
-        //   leading: Icon(Icons.vibration),
-        //   title: Text('Vibration Mode'),
-        // ),
+        // ElevatedButton(onPressed: (){}, child: Container()),
         SettingsTile.switchTile(
           onToggle: (value) {},
           initialValue: true,
@@ -118,7 +119,6 @@ class _SettingPageState extends State<SettingPage> {
       ],
     );
   }
-
 
   SettingsSection _aboutApp() {
     return SettingsSection(
@@ -144,13 +144,14 @@ class _SettingPageState extends State<SettingPage> {
           leading: Icon(Icons.account_balance_outlined),
           title: Text('License'),
           onPressed: (context) {
-            // Navigator.of(context).push(MaterialPageRoute(builder: (context)=>@@@));
+            Get.to(LicensePage());
           },
           trailing: Icon(Icons.arrow_forward_ios),
         ),
       ],
     );
   }
+
   void changeAppMode(bool isDark) {
     setState(() {
       if (isDark == true) {
@@ -163,6 +164,12 @@ class _SettingPageState extends State<SettingPage> {
     });
     print;
   }
+
+  Future<void> signOut() async {
+    final GoogleSignIn _googleSignIn = GoogleSignIn();
+    await FirebaseAuth.instance.signOut();
+    await _googleSignIn.signOut();
+    AuthController.to.signOut();
+    Get.to(() => RootPage());
+  }
 }
-
-

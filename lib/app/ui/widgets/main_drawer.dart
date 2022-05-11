@@ -41,12 +41,12 @@ class MainDrawer extends GetView<EndDrawerController> {
               Get.back();
             },
           ), // settingPage는 Get.to로 보내고.
-          ListTile(
-            title: Text('로그아웃'),
-            onTap: () async {
-              await signOut();
-            },
-          )
+          // ListTile(
+          //   title: Text('로그아웃'),
+          //   onTap: () async {
+          //     await signOut();
+          //   },
+          // )
         ],
       ),
     );
@@ -85,12 +85,5 @@ class MainDrawer extends GetView<EndDrawerController> {
             ],
           ),
         ));
-  }
-  Future<void> signOut() async {
-    final GoogleSignIn _googleSignIn = GoogleSignIn();
-    await FirebaseAuth.instance.signOut();
-    await _googleSignIn.signOut();
-    AuthController.to.signOut();
-    Get.to(()=>RootPage());
   }
 }

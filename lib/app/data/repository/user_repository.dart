@@ -29,4 +29,13 @@ class UserRepository {
       return false;
     }
   }
+
+  static Future<AppUser?> getUserInfo(String uid) async {
+    var data = await FirebaseFirestore.instance.collection(COLLECTION_USERS).where(KEY_USER_UID, isEqualTo: uid).get();
+    if(data.size==0){
+      return null;
+    }else {
+      return AppUser.fromJson(data.docs.first.data());
+    }
+  }
 }
