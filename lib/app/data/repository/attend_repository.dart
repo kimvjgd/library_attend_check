@@ -3,7 +3,7 @@ import 'package:library_attend_check/app/controller/auth_controller.dart';
 import 'package:library_attend_check/app/data/model/firestore_keys.dart';
 import 'package:logger/logger.dart';
 
-class MapRepository {
+class AttendRepository {
   static Future<void> attendanceCheck() async {
     DateTime today = DateTime.now();
     var data = await FirebaseFirestore.instance

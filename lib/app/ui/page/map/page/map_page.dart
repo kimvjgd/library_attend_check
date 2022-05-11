@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:library_attend_check/app/data/repository/map_repository.dart';
+import 'package:library_attend_check/app/data/repository/attend_repository.dart';
 import 'package:library_attend_check/app/ui/page/map/widget/choolCheckButton.dart';
 
 class MapPage extends StatefulWidget {
@@ -152,7 +152,7 @@ class _MapPageState extends State<MapPage> {
               TextButton(
                   onPressed: () async {
                     // 출석하기 버튼 누르면
-                    await MapRepository.attendanceCheck();
+                    await AttendRepository.attendanceCheck();
                     Navigator.of(context).pop(true);
                   },
                   child: Text('출석하기')),
@@ -198,7 +198,7 @@ class _MapPageState extends State<MapPage> {
     final isLocationEnabled = await Geolocator
         .isLocationServiceEnabled(); // 앱과 무관하게 핸드폰의 gps 권한이 꺼져 있으면..
 
-    choolCheckDone = await MapRepository.todayAttendCheck();
+    choolCheckDone = await AttendRepository.todayAttendCheck();
 
     if (!isLocationEnabled) {
       return '위치 서비스를 활성화 해주세요.';

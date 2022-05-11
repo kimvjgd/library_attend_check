@@ -17,20 +17,23 @@ class TodoCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final textStyle = TextStyle(
         fontWeight: FontWeight.w600, color: PRIMARY_COLOR, fontSize: 16.0);
-    return Container(
-      decoration: BoxDecoration(
-        border: Border.all(width: 1.0, color: PRIMARY_COLOR),
-        borderRadius: BorderRadius.circular(8.0),
-      ),
-      child: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Row(
-          children: [
-            TodoCheckBox(
-              todoCheck: todoCheck,
-            ),
-            _TodoContent(content: content),
-          ],
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 8.0,vertical: 4.0),
+      child: Container(
+        decoration: BoxDecoration(
+          border: Border.all(width: 1.0, color: PRIMARY_COLOR),
+          borderRadius: BorderRadius.circular(8.0),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Row(
+            children: [
+              TodoCheckBox(
+                todoCheck: todoCheck,
+              ),
+              _TodoContent(content: content),
+            ],
+          ),
         ),
       ),
     );

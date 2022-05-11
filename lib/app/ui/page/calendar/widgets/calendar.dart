@@ -3,9 +3,9 @@ import 'dart:math';
 
 import 'package:extended_image/extended_image.dart';
 import 'package:flutter/material.dart';
+import 'package:library_attend_check/app/data/repository/todo_repository.dart';
 import 'package:library_attend_check/app/ui/page/calendar/page/event.dart';
 import 'package:library_attend_check/app/ui/page/constant/colors.dart';
-import 'package:logger/logger.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 class Calendar extends StatelessWidget {
@@ -54,7 +54,7 @@ class Calendar extends StatelessWidget {
     return TableCalendar(
       calendarBuilders:
           CalendarBuilders(markerBuilder: (BuildContext context, date, events) {
-        if (events.isEmpty) return SizedBox();
+        if (events.isEmpty) return const SizedBox();
         return Container(
           // margin: const EdgeInsets.only(top: 20),
           padding: const EdgeInsets.only(bottom: 5.8),
@@ -73,31 +73,68 @@ class Calendar extends StatelessWidget {
         );
       }, dowBuilder: (context, day) {
         switch (day.weekday) {
+          case 1:
+            return const Center(
+              child: Text(
+                '월',
+                style: TextStyle(color: Colors.teal),
+              ),
+            );
+          case 2:
+            return const Center(
+              child: Text(
+                '화',
+                style: TextStyle(color: Colors.teal),
+              ),
+            );
+          case 3:
+            return const Center(
+              child: Text(
+                '수',
+                style: TextStyle(color: Colors.teal),
+              ),
+            );
+          case 4:
+            return const Center(
+              child: const Text(
+                '목',
+                style: const TextStyle(color: Colors.teal),
+              ),
+            );
+          case 5:
+            return const Center(
+              child: const Text(
+                '금',
+                style: TextStyle(color: Colors.teal),
+              ),
+            );
+
           case 6:
-            return Center(
+            return const Center(
               child: Text(
                 '토',
                 style: TextStyle(color: Colors.blue),
               ),
             );
           case 7:
-            return Center(
+            return const Center(
               child: Text(
                 '일',
                 style: TextStyle(color: Colors.red),
               ),
             );
         }
+        return null;
       }),
       eventLoader: (day) {
         // return eventList;
         return getEventsForDay(day);
       },
       locale: 'ko_KR',
-      focusedDay: focusedDay,
+      focusedDay: focusedDay,       // 몇월을 보여줘야하는 지
       firstDay: DateTime(1980),
       lastDay: DateTime(2080),
-      headerStyle: HeaderStyle(
+      headerStyle: const HeaderStyle(
         formatButtonVisible: false,
         titleCentered: true,
         titleTextStyle: TextStyle(fontWeight: FontWeight.w700, fontSize: 16.0),
@@ -107,14 +144,10 @@ class Calendar extends StatelessWidget {
           // 오늘 날짜
           defaultDecoration: defaultBoxDeco,
           weekendDecoration: defaultBoxDeco,
-
-          // markerDecoration: BoxDecoration(
-          //     image: DecorationImage(
-          //         image: AssetImage('asset/img/fire.png'), opacity: 0.3)),
           selectedDecoration: defaultBoxDeco.copyWith(
               color: Colors.white,
               border: Border.all(width: 1, color: PRIMARY_COLOR)),
-          outsideDecoration: BoxDecoration(
+          outsideDecoration: const BoxDecoration(
             shape: BoxShape.rectangle,
           ),
           defaultTextStyle: defaultTextStyle,
