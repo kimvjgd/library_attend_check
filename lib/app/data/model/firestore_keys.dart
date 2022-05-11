@@ -13,3 +13,4 @@ const KEY_USER_ATTENDANCE_LIST = 'attendance_list';
 const KEY_TODO_LIST = 'todo_list';
 const KEY_TODO_TITLE = 'title';
 const KEY_TODO_DONE = 'done';
+const KEY_TODO_COLOR = 'color';

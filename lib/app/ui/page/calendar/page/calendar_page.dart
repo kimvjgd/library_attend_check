@@ -5,6 +5,7 @@ import 'package:library_attend_check/app/data/model/firestore_keys.dart';
 import 'package:library_attend_check/app/data/repository/calendar_repository.dart';
 import 'package:library_attend_check/app/data/repository/todo_repository.dart';
 import 'package:library_attend_check/app/ui/page/calendar/widgets/calendar.dart';
+import 'package:library_attend_check/app/ui/page/calendar/widgets/todo_bottom_sheet.dart';
 import 'package:library_attend_check/app/ui/widgets/main_drawer.dart';
 import 'package:library_attend_check/app/ui/page/calendar/widgets/schedule_card.dart';
 import 'package:library_attend_check/app/ui/page/calendar/widgets/today_banner.dart';
@@ -22,7 +23,13 @@ class CalendarPage extends StatefulWidget {
 class _CalendarPageState extends State<CalendarPage> {
   List<dynamic> todoList = [];
   DateTime selectedDay =
-      DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day);
+  DateTime(DateTime
+      .now()
+      .year, DateTime
+      .now()
+      .month, DateTime
+      .now()
+      .day);
   DateTime focusedDay = DateTime.now();
   List<DateTime> attendDateList = [];
 
@@ -33,8 +40,6 @@ class _CalendarPageState extends State<CalendarPage> {
   }
 
   Future<void> initTodoList() async {
-    // todoList = await TodoRepository.getTodo(selectedDay.year.toString(),
-    //     selectedDay.month.toString(), selectedDay.day.toString());
     todoList = await TodoRepository.getTodo(selectedDay);
   }
 
@@ -71,7 +76,8 @@ class _CalendarPageState extends State<CalendarPage> {
                     onTap: () {
                       showDialog(
                           context: context,
-                          builder: (context) => MessagePopup(
+                          builder: (context) =>
+                              MessagePopup(
                                 title: "타이틀",
                                 message: '메세지',
                                 okCallback: () {
@@ -96,12 +102,18 @@ class _CalendarPageState extends State<CalendarPage> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
-          await TodoRepository.addTodo(selectedDay, 'ddda');
-          todoList = await TodoRepository.getTodo(selectedDay);
+          todoList =
+              await showModalBottomSheet(
+                  context: context,
+                  isScrollControlled: true,
+                  builder: (_) {
+                    return TodoBottomSheet(selectedDate: selectedDay,);
+                  });
           setState(() {
 
           });
         },
+
         child: Icon(Icons.add),
       ),
     );

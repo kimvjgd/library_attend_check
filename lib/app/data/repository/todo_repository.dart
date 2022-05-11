@@ -24,7 +24,7 @@ class TodoRepository {
     return data.data()![KEY_TODO_LIST];
   }
 
-  static Future<void> addTodo(DateTime selectedDate, String title) async {
+  static Future<void> addTodo(DateTime selectedDate, String title, String color) async {
     String date =
         '${selectedDate.year.toString()}.${selectedDate.month.toString().padLeft(2, '0')}.${selectedDate.day.toString().padLeft(2, '0')}';
     var temp_data = await FirebaseFirestore.instance
@@ -37,12 +37,13 @@ class TodoRepository {
 
     if (prev_data.data() != null) {
       List<dynamic> tempList = await prev_data.get(KEY_TODO_LIST) ?? [];
-      tempList.add({KEY_TODO_TITLE: title, KEY_TODO_DONE: false});
+      tempList.add({KEY_TODO_TITLE: title, KEY_TODO_DONE: false, KEY_TODO_COLOR: color});
       await temp_data.update({KEY_TODO_LIST: tempList});
     } else {
       Map<String, dynamic> tempMap = {
         KEY_TODO_TITLE: title,
-        KEY_TODO_DONE: false
+        KEY_TODO_DONE: false,
+        KEY_TODO_COLOR: color,
       };
       List<dynamic> tempList = [tempMap];
       await temp_data.set({KEY_TODO_LIST: tempList});
